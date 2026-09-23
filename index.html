@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nika Baloziani | Full-Stack Developer</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text-main: #111111;
+            --text-muted: #666666;
+            --border: #e5e5e5;
+            --max-width: 750px;
+            --transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0a0a0a;
+            --text-main: #f5f5f5;
+            --text-muted: #a0a0a0;
+            --border: #262626;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            padding: 0 20px;
+            transition: var(--transition);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: var(--bg);
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: -0.3px;
+            text-transform: uppercase;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.15s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--border);
+        }
+
+        section {
+            padding: 60px 0 20px 0;
+            word-wrap: break-word;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.2px;
+            text-transform: uppercase;
+        }
+
+        #about h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.8px;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            max-width: 100%;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 100%;
+        }
+
+        .projects-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            margin-top: 16px;
+        }
+
+        .project-card {
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px;
+            background: var(--bg);
+            transition: var(--transition);
+        }
+
+        .project-image {
+            width: 100%;
+            height: auto;
+            max-height: 380px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .project-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .project-description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .project-tag {
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .project-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--text-main);
+            padding-bottom: 2px;
+            transition: opacity 0.15s ease;
+        }
+
+        .project-links a:hover {
+            opacity: 0.7;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 16px;
+        }
+
+        .skill-category h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .skill-category p {
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .timeline-item {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .timeline-header h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .timeline-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .timeline-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .contact-methods {
+            margin-bottom: 24px;
+        }
+
+        .contact-row {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .contact-row span {
+            color: var(--text-muted);
+            display: inline-block;
+            width: 60px;
+            flex-shrink: 0;
+        }
+
+        .contact-row a {
+            color: var(--text-main);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s ease;
+            word-break: break-all;
+        }
+
+        .contact-row a:hover {
+            border-color: var(--text-main);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.15s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--text-main);
+        }
+
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        @media (max-width: 480px) {
+            #about h1 {
+                font-size: 1.65rem;
+            }
+
+            section {
+                padding: 40px 0 10px 0;
+            }
+
+            nav {
+                padding: 16px 0;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .nav-right {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="container">
+            <div class="logo">Nika Baloziani</div>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#capabilities">Stack</a></li>
+                    <li><a href="#credentials">Education</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">Dark</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <section id="about">
+            <h1>Full-Stack Developer</h1>
+            <p class="subtitle">Based in Georgia. Engineering secure backends, robust database schemas, and
+                strictly-typed client-side web applications.</p>
+        </section>
+
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+
+                <div class="project-card">
+                    <img src="./Images/Screenshot 2026-09-23 192850.png" alt="Vocell Application" class="project-image">
+                    <div class="project-title">Vocell — Real-Time Voice & Chat App</div>
+                    <p class="project-description">A high-performance communication platform enabling real-time voice calls and instant messaging, complete with WebRTC connectivity, push notifications, and seamless user state synchronization.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">React</span>
+                        <span class="project-tag">Supabase</span>
+                        <span class="project-tag">WebRTC</span>
+                        <span class="project-tag">Tailwind CSS</span>
+                        <span class="project-tag">Push Notifications</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://vocell.vercel.app" target="_blank" rel="noopener">Live Demo ↗</a>
+                        <a href="https://github.com/Nikabaloziani" target="_blank" rel="noopener">Source Code ↗</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="./Images/Screenshot 2026-09-23 190359.png" alt="Paswordly Application" class="project-image">
+                    <div class="project-title">Paswordly — Password Management Vault</div>
+                    <p class="project-description">A secure vault system engineered for encrypting, storing, and organizing credentials with health metrics, strength validation, and multi-layered access management.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Angular</span>
+                        <span class="project-tag">C# / ASP.NET Core</span>
+                        <span class="project-tag">Entity Framework Core</span>
+                        <span class="project-tag">SQL Server</span>
+                        <span class="project-tag">JWT Auth</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://paswordly.vercel.app" target="_blank" rel="noopener">Live Demo ↗</a>
+                        <a href="https://github.com/Nikabaloziani" target="_blank" rel="noopener">Source Code ↗</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="capabilities">
+            <h2>Technical Stack</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Backend Architecture</h3>
+                    <p>C#, ASP.NET, Entity Framework Core, REST APIs</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Database Management</h3>
+                    <p>SQL Server, PostgreSQL, Supabase</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Frontend Systems</h3>
+                    <p>Angular, React, TypeScript, JavaScript, Tailwind CSS</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Real-Time & Cloud</h3>
+                    <p>WebRTC, Push Notifications, Vercel, Git Workflow</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="credentials">
+            <h2>Education</h2>
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <h3>IT Academy STEP</h3>
+                    <span class="timeline-date">Graduate</span>
+                </div>
+                <p>Completed intensive, hands-on software development program specializing in enterprise engineering,
+                    object-oriented programming, and modern web application development stacks.</p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="contact-methods">
+                <div class="contact-row"><span>Email</span> <a
+                        href="mailto:balozianinikolozi@gmail.com">balozianinikolozi@gmail.com</a></div>
+                <div class="contact-row"><span>Phone</span> <a href="tel:+995555228428">+995 555 22 84 28</a></div>
+            </div>
+            <ul class="social-links">
+                <li><a href="https://github.com/Nikabaloziani" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://www.linkedin.com/in/nika-baloziani-515265316/" target="_blank"
+                        rel="noopener">LinkedIn</a></li>
+                <li><a href="https://www.instagram.com/nikoloz_baloziani/" target="_blank" rel="noopener">Instagram</a>
+                </li>
+                <li><a href="https://www.facebook.com/nikoloz.baloziani" target="_blank" rel="noopener">Facebook</a>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="container">
+        <p>&copy; 2026 Nika Baloziani</p>
+        <p>Full-Stack Developer</p>
+    </footer>
+
+    <script>
+        const themeBtn = document.getElementById('themeBtn');
+
+        const getPreferredTheme = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) return savedTheme;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        };
+
+        const setTheme = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeBtn.textContent = theme === 'dark' ? 'Light' : 'Dark';
+        };
+
+        setTheme(getPreferredTheme());
+
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+    </script>
+</body>
+
+</html>
